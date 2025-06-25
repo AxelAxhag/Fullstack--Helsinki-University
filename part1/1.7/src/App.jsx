@@ -4,8 +4,8 @@ const Button = ({onClick, text}) => <button onClick={onClick}>{text}</button>
 
 const Stats = ({good, neutral, bad}) => {
   const all = good + neutral + bad
-  const average = (good - bad)/all
-  const positive = good/all*100 
+  const average = all === 0 ? 0 : (good - bad)/all
+  const positive = all === 0 ? 0 : good/all*100
 
   return (
   <>
