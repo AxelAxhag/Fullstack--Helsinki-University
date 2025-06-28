@@ -44,6 +44,8 @@ const App = () => {
       <Button text={"next anecdote"} onClick={next_anecdote}/>
       <h1>Anecdote with most votes</h1>
       {anecdotes[popular]}
+      <br/>
+      votes: {votes[popular]} 
     </>
   )
 }
