@@ -16,26 +16,21 @@ const App = () => {
   
   const [selected, setSelected] = useState(0)
   const [votes, setVotes] = useState(Array(anecdotes.length).fill(0))
-  let max_index = 0
+  const [popular, setPopular] = useState(0)
   
   // Can pick the same one
   const next_anecdote = () => setSelected(Math.floor(Math.random() * anecdotes.length))
-  const popular_anecdote = () => {
 
-    votes.forEach((_, index) => {
-      if (votes[index] > votes[max_index]) 
-        max_index = index
-    });
-
-    return anecdotes[max_index]
-  }
   const increment_vote = () => {
     const copy = [...votes]
     copy[selected]++
     setVotes(copy)
-  }
 
-  popular_anecdote()
+    copy.forEach((_, index) => {
+      if (copy[index] > copy[popular])
+        setPopular(index)
+    });
+  }
 
   return (
     <>
@@ -45,10 +40,10 @@ const App = () => {
         <br/>
         votes: {votes[selected]}
       </div>
-      <Button text={"vote"} onClick={increment_vote}/>
+      <Button text={"vote"} onClick={() => {increment_vote()}}/>
       <Button text={"next anecdote"} onClick={next_anecdote}/>
       <h1>Anecdote with most votes</h1>
-      {popular_anecdote()}
+      {anecdotes[popular]}
     </>
   )
 }
