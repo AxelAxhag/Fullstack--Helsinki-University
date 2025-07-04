@@ -37,7 +37,7 @@ const App = () => {
   }
 
   const handleFilterChange = (event) => {
-    setFilter(new RegExp(event.target.value))
+    setFilter(new RegExp(event.target.value.toLowerCase()))
   }
 
   const contactsToShow = persons.filter((person) => person.name.toLowerCase().match(filter))

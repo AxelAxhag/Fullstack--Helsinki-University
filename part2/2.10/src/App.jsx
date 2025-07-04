@@ -71,7 +71,7 @@ const App = () => {
   }
 
   const handleFilterChange = (event) => {
-    setFilter(new RegExp(event.target.value))
+    setFilter(new RegExp(event.target.value.toLowerCase()))
   }
 
   const contactsToShow = persons.filter((person) => person.name.toLowerCase().match(filter))
@@ -79,7 +79,13 @@ const App = () => {
   return (
     <div>
       <Search onChange={handleFilterChange}/>
-      <AddContact onSubmit={handleOnSubmit} newName={newName} newPhone={newPhone} nameOnChange={handleNameChange} phoneOnChange={handlePhoneChange}/>  
+      <AddContact 
+      onSubmit={handleOnSubmit} 
+      newName={newName} 
+      newPhone={newPhone} 
+      nameOnChange={handleNameChange} 
+      phoneOnChange={handlePhoneChange}
+      />  
       <Persons persons={contactsToShow}/>
     </div>
   )
