@@ -8,7 +8,7 @@ const SearchBar = ({search, onChangeSearch}) => {
   )
 } 
 
-const CountryList = ({countries}) => {
+const CountryList = ({countries, onShow}) => {
   const max_country_amount = 10
   const message = <>Too many countries listed, specify search further.<br/> Max. amount of countries = {max_country_amount}</>
   if (countries.length > max_country_amount) return message
@@ -18,7 +18,7 @@ const CountryList = ({countries}) => {
     <>
       Amount of countries: {countries.length}
         <ul>
-          {countries.map((country) => <li key={country.cca2}>{country.name.common}</li>)}
+          {countries.map((country) => <li key={country.cca2}>{country.name.common} <button onClick={() => onShow(country)}>Show</button></li>)}
         </ul>
     </>
   )
@@ -39,7 +39,7 @@ const SingleCountryInfo = ({country}) => {
       🏙️ {capital} <br/>
       🧑 {population} <br/>
       💵 {currency} ({currency_symbol}) <br/>
-      💬 {languages}            
+      💬 {languages}
     </>
   )
 }
@@ -55,6 +55,10 @@ const App = () => {
   const setupData = () => {
     loadCountryData()
       .then((data) => setCountries(data))
+  }
+
+  const onShow = (country) => {
+    setSearch(country.name.common)
   }
 
   useEffect(setupData, [])
@@ -73,6 +77,7 @@ const App = () => {
       <h3>Countries</h3>
       <CountryList 
       countries={country_query}
+      onShow={onShow}
       />
     </>
   )
